@@ -47,7 +47,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:digits="345"
-            android:ems="1"
+            android:maxLength="1"
             android:inputType="number" />
 
         <Button
