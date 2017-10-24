@@ -13,44 +13,66 @@ import android.graphics.Paint;
  * Created by Silman on 10/22/2017.
  */
 
-public class GameAnimationView extends SurfaceView implements SurfaceHolder.Callback {
+public class GameAnimationView extends SurfaceView {
+    private GameThread gameThread;
+    private SurfaceHolder surfaceHolder;
+
     public GameAnimationView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        getHolder().addCallback(this);
+        init();
     }
 
 
-   @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width,
-                               int height){
+    public void init() {
 
-    }
+        gameThread = new GameThread(this);
 
-    @Override
-    public void surfaceCreated(SurfaceHolder holder) {
-        Canvas c = holder.lockCanvas();
-        onDraw(c);
-        holder.unlockCanvasAndPost(c);
-    }
+        surfaceHolder = getHolder();
+
+        surfaceHolder.addCallback(new SurfaceHolder.Callback() {
+
+            @Override
+            public void surfaceChanged(SurfaceHolder holder,int format, int width,
+            int height){
+
+            }
+
+            @Override
+            public void surfaceCreated(SurfaceHolder holder){
+                gameThread.setRunning(true);
+                gameThread.start();
+            }
 
 
+            @Override
+            public void surfaceDestroyed(SurfaceHolder holder){
+                boolean retry = true;
+                gameThread.setRunning(false);
+                while (retry) {
+                    try {
+                        gameThread.join();
+                        retry = false;
+                    } catch (InterruptedException e){
+                }
 
-    @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-
+            }
+        }});
     }
 
     public void onDraw(Canvas canvas) {
 
         int x = getWidth();
         int y = getHeight();
+        long currentTime = System.currentTimeMillis();
+
 
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.BLUE);
-        canvas.drawRect(0,0,x / 2, y / 2 ,paint);
+        canvas.drawRect(0, 0, x / 2, y / 2, paint);
 
 
     }
+}
 
-    }
+

@@ -2,10 +2,14 @@ package com.harrysilman.towersofhanoi;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
 
 public class MainActivity extends Activity {
 
     private GameAnimationView gameAnimationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -13,6 +17,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         gameAnimationView = (GameAnimationView) findViewById(R.id.gameAnimationView);
+        Button startButton = (Button)findViewById(R.id.startButton);
+        startButton.setOnClickListener(mStartListener);
+
     }
 
     @Override
@@ -26,4 +33,13 @@ public class MainActivity extends Activity {
         super.onDestroy();
 
     }
+
+    private View.OnClickListener mStartListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            gameAnimationView.init();
+        }
+    };
+
+
 }
