@@ -65,9 +65,15 @@ public class GameAnimationView extends SurfaceView {
         int y = getHeight();
 
         Paint paint = new Paint();
-        paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.BLUE);
-        canvas.drawRect(0, 0, x / 2, y / 2, paint);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(10);
+        canvas.drawRect(5,getBottom(),x/3,0,paint);
+        canvas.drawRect(x/3,getBottom(),(x/3)+(x/3),0,paint);
+        canvas.drawRect(2*(x/3),getBottom(),x,0,paint);
+
+
+
 
 
     }
