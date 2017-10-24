@@ -63,7 +63,7 @@ public class GameAnimationView extends SurfaceView {
 
         int x = getWidth();
         int y = getHeight();
-        
+
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.BLUE);
