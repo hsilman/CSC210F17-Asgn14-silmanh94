@@ -9,6 +9,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 /**
  * Created by Silman on 10/22/2017.
  */
@@ -16,6 +20,8 @@ import android.graphics.Paint;
 public class GameAnimationView extends SurfaceView {
     private GameThread gameThread;
     private SurfaceHolder surfaceHolder;
+
+    List<String> diskMovesList = MainActivity.returnList();
 
     public GameAnimationView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -28,6 +34,10 @@ public class GameAnimationView extends SurfaceView {
         gameThread = new GameThread(this);
 
         surfaceHolder = getHolder();
+
+        ArrayList<Disk> pegA = new ArrayList<>();
+        ArrayList<Disk> pegB = new ArrayList<>();
+        ArrayList<Disk> pegC = new ArrayList<>();
 
         surfaceHolder.addCallback(new SurfaceHolder.Callback() {
 
@@ -63,15 +73,15 @@ public class GameAnimationView extends SurfaceView {
 
         int x = getWidth();
 
-
         Paint paint = new Paint();
+
+        // paint the three pegs as boxes
         paint.setColor(Color.BLUE);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(10);
         canvas.drawRect(5,getBottom(),x/3,0,paint);
         canvas.drawRect(x/3,getBottom(),(x/3)+(x/3),0,paint);
         canvas.drawRect(2*(x/3),getBottom(),x,0,paint);
-
 
 
 
@@ -110,6 +120,21 @@ public class GameAnimationView extends SurfaceView {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    public class Disk {
+
+        int x = getWidth();
+
+        public Disk(){
+            this.height = 40;
+            int width = (x/3)/number;
+
+        }
+
+        public void moveDisk(char peg){
+
         }
     }
 

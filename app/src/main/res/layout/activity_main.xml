@@ -15,16 +15,6 @@
         android:layout_height="0px"
         android:layout_weight="1"/>
 
-    <TextView
-        android:id="@+id/movesTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:text="@string/moves_format"
-        android:textAlignment="center"
-        android:textAppearance="@android:style/TextAppearance.Material.Large"
-        android:visibility="invisible" />
-
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -59,5 +49,11 @@
             android:layout_marginLeft="30dp"
             android:text="@string/start_button" />
     </GridLayout>
+
+    <ListView
+        android:id="@+id/movesListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>
