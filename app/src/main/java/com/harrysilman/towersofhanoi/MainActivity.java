@@ -21,7 +21,7 @@ public class MainActivity extends Activity {
 
         gameAnimationView = (GameAnimationView) findViewById(R.id.gameAnimationView);
         Button startButton = (Button)findViewById(R.id.startButton);
-        startButton.setOnClickListener(mStartListener);
+        //startButton.setOnClickListener(mStartListener); //disabled until I figure this out
 
     }
 
@@ -37,12 +37,16 @@ public class MainActivity extends Activity {
 
     }
 
+    /*
+    * Have to figure out starting the gamethread with a click event
     private View.OnClickListener mStartListener = new View.OnClickListener() {
+
         @Override
         public void onClick(View view) {
             gameAnimationView.init();
         }
     };
+    */
 
 
 }
