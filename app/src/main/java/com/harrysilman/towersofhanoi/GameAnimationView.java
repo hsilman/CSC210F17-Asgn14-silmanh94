@@ -2,11 +2,14 @@ package com.harrysilman.towersofhanoi;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.widget.EditText;
 
 
 import java.util.ArrayList;
@@ -23,6 +26,8 @@ public class GameAnimationView extends SurfaceView {
 
     List<String> diskMovesList = MainActivity.returnList();
 
+    ArrayList<Integer>[] pegs = new ArrayList[3];
+
     public GameAnimationView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
@@ -35,9 +40,10 @@ public class GameAnimationView extends SurfaceView {
 
         surfaceHolder = getHolder();
 
-        ArrayList<Disk> pegA = new ArrayList<>();
-        ArrayList<Disk> pegB = new ArrayList<>();
-        ArrayList<Disk> pegC = new ArrayList<>();
+
+
+
+
 
         surfaceHolder.addCallback(new SurfaceHolder.Callback() {
 
@@ -75,6 +81,7 @@ public class GameAnimationView extends SurfaceView {
 
         Paint paint = new Paint();
 
+
         // paint the three pegs as boxes
         paint.setColor(Color.BLUE);
         paint.setStyle(Paint.Style.STROKE);
@@ -82,8 +89,6 @@ public class GameAnimationView extends SurfaceView {
         canvas.drawRect(5,getBottom(),x/3,0,paint);
         canvas.drawRect(x/3,getBottom(),(x/3)+(x/3),0,paint);
         canvas.drawRect(2*(x/3),getBottom(),x,0,paint);
-
-
 
 
     }
@@ -105,6 +110,7 @@ public class GameAnimationView extends SurfaceView {
         public void run() {
             while(running){
 
+
                 Canvas canvas = gameAnimation.getHolder().lockCanvas();
 
                 if(canvas != null){
@@ -123,20 +129,7 @@ public class GameAnimationView extends SurfaceView {
         }
     }
 
-    public class Disk {
 
-        int x = getWidth();
-
-        public Disk(){
-            this.height = 40;
-            int width = (x/3)/number;
-
-        }
-
-        public void moveDisk(char peg){
-
-        }
-    }
 
 }
 

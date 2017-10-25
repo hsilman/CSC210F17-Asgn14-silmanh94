@@ -19,8 +19,6 @@ public class MainActivity extends Activity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private GameAnimationView gameAnimationView;
-
     // create an arraylist of strings for the move list
     ArrayList<String> movesList = new ArrayList<String>();
 
@@ -61,8 +59,10 @@ public class MainActivity extends Activity {
             diskMoveList.clear();
             movesList.clear();
 
+
+
             //access the user input of disk number programmatically
-            EditText numberEditText = (EditText)findViewById(R.id.numberEditText);
+            EditText numberEditText = findViewById(R.id.numberEditText);
             numberOfDisks = Integer.valueOf(numberEditText.getText().toString());
 
             // run the number of disks through the Hanoi solver algorithm
@@ -93,7 +93,6 @@ public class MainActivity extends Activity {
             ListView lv = findViewById(R.id.movesListView);
 
             // use an ArrayAdapter to display the move list
-
             ArrayAdapter<String> itemsAdapter =
                     new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
                             movesList);
@@ -103,6 +102,8 @@ public class MainActivity extends Activity {
         public static ArrayList<String> returnList(){
             return(diskMoveList);
         }
+
+
     }
 
 
