@@ -22,18 +22,37 @@ public class MainActivity extends Activity {
     // create an arraylist of strings for the move list
     ArrayList<String> movesList = new ArrayList<String>();
 
-    // create an arraylist for the graphical movement
-    public static ArrayList<String> diskMoveList = new ArrayList<String>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //access the user input of disk number programmatically
+        final EditText numberEditText = findViewById(R.id.numberEditText);
+
+        //register GameAnimationView
+        final GameAnimationView gameAnimationView = findViewById(R.id.gameAnimationView);
+
         // register the start button and a click listener
-        Button startButton = (Button)findViewById(R.id.startButton);
-        startButton.setOnClickListener(mStartListener);
+        Button startButton = findViewById(R.id.startButton);
+        startButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                movesList.clear();
+
+                // run the number of disks through the Hanoi solver algorithm
+                try {
+                    String size = numberEditText.getText().toString();
+                    int intSize = Integer.parseInt(size);
+                    gameAnimationView.setSize(intSize);
+                    solve(intSize,"A","B","C");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 
@@ -50,42 +69,15 @@ public class MainActivity extends Activity {
     }
 
 
-    // describe what the button does
-    private View.OnClickListener mStartListener = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View view) {
-            int numberOfDisks;
-            diskMoveList.clear();
-            movesList.clear();
-
-
-
-            //access the user input of disk number programmatically
-            EditText numberEditText = findViewById(R.id.numberEditText);
-            numberOfDisks = Integer.valueOf(numberEditText.getText().toString());
-
-            // run the number of disks through the Hanoi solver algorithm
-            try {
-                solve(numberOfDisks,"A","B","C");
-                Log.d(TAG, diskMoveList.toString());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }
-    };
-
-        // solve the Towers of Hanoi using recursion
+     // solve the Towers of Hanoi using recursion for listview text
         public void solve(int n, String start, String auxiliary, String end) throws InterruptedException {
             if (n == 1) {
-                // add each move to the arraylist & diskmovelist
+                // add each move to the arraylist
                 movesList.add(start + " -> " + end);
-                diskMoveList.add(start + "," + end);
             } else {
                 solve(n - 1, start, end, auxiliary);
+                // add each move the the arraylist
                 movesList.add(start + " -> " + end);
-                diskMoveList.add(start + "," + end);
                 solve(n - 1, auxiliary, start, end);
             }
 
@@ -99,9 +91,6 @@ public class MainActivity extends Activity {
             lv.setAdapter(itemsAdapter);
         }
 
-        public static ArrayList<String> returnList(){
-            return(diskMoveList);
-        }
 
 
     }

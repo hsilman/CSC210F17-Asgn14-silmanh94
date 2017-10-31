@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:rowCount="1"
         tools:columnCount="3">
 
         <TextView
@@ -36,10 +37,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
-            android:textAlignment="center"
             android:digits="345"
+            android:inputType="number"
             android:maxLength="1"
-            android:inputType="number" />
+            android:textAlignment="center" />
 
         <Button
             android:id="@+id/startButton"
